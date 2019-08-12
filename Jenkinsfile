@@ -9,44 +9,40 @@ pipeline {
         
         stage('Check Style, FindBugs, PMD') {
             steps {
-			    script {
-				echo 'Starting to build docker image'
-				def myEnv = docker.image('gradle:latest') 
-				
-				      myEnv.inside {
-                         sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
-				        
-                					  
-            
-                      post {
+		script {
+			echo 'Starting to build docker image'
+			def myEnv = docker.image('gradle:latest') 	
+			      myEnv.inside {
+                         		sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
+                     	post {
                            always {
-								step([
-									$class         : 'FindBugsPublisher',
-									pattern        : 'build/reports/findbugs/*.xml',
-									canRunOnFailed : true
-								])
-								step([
-									$class         : 'PmdPublisher',
-									pattern        : 'build/reports/pmd/*.xml',
-									canRunOnFailed : true
-								])
-								step([
-									$class: 'CheckStylePublisher', 
-									pattern: 'build/reports/checkstyle/*.xml',
-									canRunOnFailed : true
-								])
-							}
-						}
-					}
+					step([
+						$class         : 'FindBugsPublisher',
+						pattern        : 'build/reports/findbugs/*.xml',
+						canRunOnFailed : true
+					])
+					step([
+						$class         : 'PmdPublisher',
+						pattern        : 'build/reports/pmd/*.xml',
+						canRunOnFailed : true
+					])
+					step([
+						$class         : 'CheckStylePublisher', 
+						pattern        : 'build/reports/checkstyle/*.xml',
+						canRunOnFailed : true
+					])
 				}
-			}				
-		}
-		stage('Test') {
+			}
+		        }
+		  }
+	   }				
+      }
+        stage('Test') {
             steps {
-			       myEnv.inside {
-						sh './gradlew --no-daemon check'
-					}	
-               }
+	         myEnv.inside {
+		      sh './gradlew --no-daemon check'
+		}	
+             }
             post {
                 always {
                     junit 'build/test-results/test/*.xml'
@@ -55,12 +51,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-			   myEnv.inside {
-						sh './gradlew --no-daemon build'
-					}
-				}
- 
-
+		 myEnv.inside {
+			   sh './gradlew --no-daemon build'
+			  }
+		 }
             }
-	    }
     }
+ }
