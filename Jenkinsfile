@@ -39,9 +39,11 @@ pipeline {
       }
         stage('Test') {
             steps {
-	         myEnv.inside {
-		      sh './gradlew --no-daemon check'
-		}	
+		    script {
+	                 myEnv.inside {
+		            sh './gradlew --no-daemon check'
+			 }
+		  }	
              }
             post {
                 always {
@@ -51,9 +53,11 @@ pipeline {
         }
         stage('Build') {
             steps {
-		 myEnv.inside {
-			   sh './gradlew --no-daemon build'
+		    script {
+		          myEnv.inside {
+			      sh './gradlew --no-daemon build'
 			  }
+		    }
 		 }
             }
     }
