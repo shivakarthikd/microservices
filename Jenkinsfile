@@ -21,12 +21,13 @@ pipeline {
 		                       script {
 			                   myEnv.inside {
                                                  sh './gradlew --no-daemon clean'
-			                }
-		                  }
-                               }
-                           }
-		    }
+			                    }
+		                        }
+                                 }
+                             }
+		       }
 	    }
+	}
         
         stage('Check Style, FindBugs, PMD') {
             steps {
