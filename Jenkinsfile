@@ -3,12 +3,11 @@ pipeline {
    
     options { disableConcurrentBuilds() }
     stages {
+	echo 'Starting to build docker image'
+	def myEnv = docker.image('gradle:latest') 
 	stage('Permissions') {
             steps {
 		    script {
-			echo 'Starting to build docker image'
-			def myEnv = docker.image('gradle:latest') 
-                
 			    myEnv.inside {
 			         sh 'chmod 775 *'
 			    }
@@ -27,7 +26,7 @@ pipeline {
         stage('Check Style, FindBugs, PMD') {
             steps {
 		    script{
-			    ${myEnv}.inside {
+			    myEnv.inside {
                          		sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
                      	post {
                            always {
