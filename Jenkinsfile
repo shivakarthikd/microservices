@@ -14,17 +14,17 @@ pipeline {
                 
 			    myEnv.inside {
 			         sh 'chmod 775 *'
+			    }
 			   
 	                     stage('Cleanup') {
                                 steps {
 		                       script {
 			                   myEnv.inside {
-                                    sh './gradlew --no-daemon clean'
+                                                 sh './gradlew --no-daemon clean'
 			                }
 		                  }
                                }
-                              } 
-			   }
+                           }
 		    }
 	    }
         
