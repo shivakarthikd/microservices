@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy
 pipeline {
     agent any
     triggers {
@@ -16,7 +15,7 @@ pipeline {
 			         sh 'chmod 775 *'
 			    }
 			   
-	                     stage('Cleanup') {
+	                    stage('Cleanup') {
                                 steps {
 		                       script {
 			                   myEnv.inside {
