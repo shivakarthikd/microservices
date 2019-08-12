@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM('*/15 * * * *')
-    }
+   
     options { disableConcurrentBuilds() }
     stages {
 	stage('Permissions') {
@@ -16,7 +14,6 @@ pipeline {
 			    }
 			   
 	                    stage('Cleanup') {
-                                steps {
 		                       script {
 			                   myEnv.inside {
                                                  sh './gradlew --no-daemon clean'
@@ -26,7 +23,6 @@ pipeline {
                              }
 		       }
 	    }
-	}
         
         stage('Check Style, FindBugs, PMD') {
             steps {
