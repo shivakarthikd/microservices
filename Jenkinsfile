@@ -19,9 +19,9 @@ pipeline {
             }
         }
 		
-		stage('Cleanup') {
-            steps {
-		    script {
+	 stage('Cleanup') {
+              steps {
+		      script {
 			    myEnv.inside {
                                     sh './gradlew --no-daemon clean'
 			    }
