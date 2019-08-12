@@ -1,10 +1,11 @@
+echo 'Starting to build docker image'
+def myEnv = docker.image('gradle:latest') 
 pipeline {
     agent any
    
     options { disableConcurrentBuilds() }
     stages {
-	echo 'Starting to build docker image'
-	def myEnv = docker.image('gradle:latest') 
+	
 	stage('Permissions') {
             steps {
 		    script {
