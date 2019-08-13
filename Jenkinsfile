@@ -63,5 +63,13 @@ pipeline {
 			
 		 }
             }
+	stage ('Deploy') {
+		steps {
+			sh ''' docker build -t person:latest .
+			       docker run -p 9090:9090 --name person -t -d person:latest
+			       docker rmi $(docker images -f “dangling=true” -q) 
+			'''
+		}
+			       
     }
  }
