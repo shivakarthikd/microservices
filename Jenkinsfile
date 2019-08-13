@@ -13,7 +13,8 @@ pipeline {
 	      }
              steps {
                   sh ''' chmod 775 *
-		        ./gradlew --no-daemon clean '''
+		        ./gradlew --no-daemon clean 
+	          '''
 	    }
 	}
                          
@@ -23,6 +24,7 @@ pipeline {
 		      image 'jenkinsci/jnlp-slave:latest'
 		      label 'docker'
 		      args '-v $HOME/.m2:/root/.m2'
+		  }
 		}
 		steps {
                         sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
