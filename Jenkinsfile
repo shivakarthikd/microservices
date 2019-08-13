@@ -71,7 +71,7 @@ pipeline {
 		agent { dockerfile true }
 		steps {
 			script {
-				 def img=docker.build('person:latest')
+				
 				 docker.image(img)
 			}
 		}
