@@ -1,28 +1,29 @@
 pipeline {
-	agent {
-		docker {
-		    image 'jenkinsci/jnlp-slave:latest'
-		    label 'docker'
-		    args '-v $HOME/.m2:/root/.m2'
-		}
-	}
+    agent any
     options { disableConcurrentBuilds() }
     stages {
 	
-	stage('Permissions') {
-            steps {
-                  sh 'chmod 775 *'
+	stage('Permissions','clean up') {
+	     agent {
+		 docker {
+		    image 'jenkinsci/jnlp-slave:latest'
+		    label 'docker'
+		    args '-v $HOME/.m2:/root/.m2'
+		 }
+	      }
+             steps {
+                  sh ''' chmod 775 *
+		        ./gradlew --no-daemon clean '''
 	    }
 	}
-			   
-	stage('Cleanup') {
-		steps {
-                      sh './gradlew --no-daemon clean'
-		}
- 	}
                          
-        
         stage('Check Style, FindBugs, PMD') {
+		agent {
+		  docker {
+		      image 'jenkinsci/jnlp-slave:latest'
+		      label 'docker'
+		      args '-v $HOME/.m2:/root/.m2'
+		}
 		steps {
                         sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
 			    
