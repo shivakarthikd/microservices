@@ -67,8 +67,8 @@ pipeline {
 		
 		steps {
 			script {
-				def img=docker.build('person:latest')
-				docker.image(img)
+				 def img=docker.build('person:latest')
+				 docker.image(img)
 			}
 			      
 		
