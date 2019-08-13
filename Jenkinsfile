@@ -69,7 +69,7 @@ pipeline {
 			script {
 				 def img=docker.build('person:latest')
 				 docker.image(img)
-			}
+			
 			      
 		
 		}
