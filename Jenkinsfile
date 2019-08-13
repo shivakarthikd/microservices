@@ -3,7 +3,7 @@ pipeline {
     options { disableConcurrentBuilds() }
     stages {
 	
-	stage('Permissions','clean up') {
+	stage('Permissions,clean up') {
 	     agent {
 		 docker {
 		    image 'jenkinsci/jnlp-slave:latest'
