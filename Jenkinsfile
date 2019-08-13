@@ -1,9 +1,9 @@
-echo 'Starting to build docker image'
-def myEnv = docker.image('gradle:latest') 
 pipeline {
 	agent {
-		node {
+		docker {
+		    image 'jenkinsci/jnlp-slave'
 		    label 'docker'
+		    args '-v $HOME/.m2:/root/.m2'
 		}
 	}
     options { disableConcurrentBuilds() }
