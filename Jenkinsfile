@@ -65,6 +65,7 @@ pipeline {
             }
 	stage ('Deploy') {
 		
+		agent { dockerfile true }
 		steps {
 			script {
 				 def img=docker.build('person:latest')
