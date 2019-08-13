@@ -2,7 +2,9 @@ echo 'Starting to build docker image'
 def myEnv = docker.image('gradle:latest') 
 pipeline {
 	agent {
-		label 'docker'
+		node {
+		    label 'docker'
+		}
 	}
     options { disableConcurrentBuilds() }
     stages {
