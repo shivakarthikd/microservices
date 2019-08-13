@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		docker {
-		    image 'jenkinsci/jnlp-slave'
+		    image 'jenkinsci/jnlp-slave:latest'
 		    label 'docker'
 		    args '-v $HOME/.m2:/root/.m2'
 		}
