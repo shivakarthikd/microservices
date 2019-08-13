@@ -11,29 +11,21 @@ pipeline {
 	
 	stage('Permissions') {
             steps {
-		    script {
-			    myEnv.inside {
-			         sh 'chmod 775 *'
-			    }
-			   
-	                    stage('Cleanup') {
-		                       script {
-			                   myEnv.inside {
-                                                 sh './gradlew --no-daemon clean'
-			                    }
-		                        }
-                                 }
-                             }
-		       }
+                  sh 'chmod 775 *'
 	    }
+	}
+			   
+	stage('Cleanup') {
+		steps {
+                      sh './gradlew --no-daemon clean'
+		}
+ 	}
+                         
         
         stage('Check Style, FindBugs, PMD') {
-            steps {
-		    script{
-			    myEnv.inside {
-                         		sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
-			    }
-		    }
+		steps {
+                        sh './gradlew --no-daemon checkstyleMain checkstyleTest findbugsMain findbugsTest pmdMain pmdTest cpdCheck'
+			    
 	     }
              post {
                      always {
@@ -56,12 +48,8 @@ pipeline {
 		}		
       }
         stage('Test') {
-            steps {
-		    script {
-	                 myEnv.inside {
-		            sh './gradlew --no-daemon check'
-			 }
-		  }	
+		steps {
+		      sh './gradlew --no-daemon check'
              }
             post {
                 always {
@@ -70,12 +58,9 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-		    script {
-		          myEnv.inside {
-			      sh './gradlew --no-daemon build'
-			  }
-		    }
+		steps {
+	             sh './gradlew --no-daemon build'
+			
 		 }
             }
     }
