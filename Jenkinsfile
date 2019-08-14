@@ -72,6 +72,7 @@ pipeline {
                     script {
                         docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
+			}
                     }
                 }
          }
