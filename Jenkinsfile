@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+       registry = "shivakarthik/microservice"
+       registryCredential = 'dockerhub'
+   }
     agent { label 'docker' }
     options { disableConcurrentBuilds() }
     stages {
@@ -56,15 +60,21 @@ pipeline {
 	 stage('Update Docker UAT image') {
            
               steps {
-                 sh '''
-		    docker login -u "shivakarthik" -p "Karthik@123"
-                    docker build --no-cache -t person .
-                    docker tag person:latest microservice/person:latest
-                    docker push microservice/person:latest
-	            docker rmi person:latest
-                '''
+		      script {
+		   
+                             docker.build registry + "person:$BUILD_NUMBER"
+		   }
             }
 	 }
+	 stage('Deploy Image') {
+                steps{
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+         }
+     
 			       
     }
  }
