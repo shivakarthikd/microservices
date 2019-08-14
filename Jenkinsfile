@@ -60,7 +60,7 @@ pipeline {
          stage('copy artifacts'){
 		    
 		 steps {
-			 copyArtifacts filter: '**/*.jar', fingerprintArtifacts: true, projectName: 'Microservices', selector: lastSuccessful(), target: '/jenkins/targets'
+			 copyArtifacts filter: '${JENKINS_HOME}/*.jar', fingerprintArtifacts: true, projectName: 'Microservices', selector: lastSuccessful(), target: '/jenkins/targets'
 		 }
 	 }
 	    
