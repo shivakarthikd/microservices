@@ -4,7 +4,6 @@ pipeline {
     stages {
 	
 	stage('Permissions,clean up') {
-	      }
              steps {
                   sh ''' chmod 775 *
 		        ./gradlew --no-daemon clean 
