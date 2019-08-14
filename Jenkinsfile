@@ -69,7 +69,7 @@ pipeline {
               steps {
 		      script {
 		   
-                             docker.build registry + "person:$BUILD_NUMBER"
+                             docker.build registry + ":$BUILD_NUMBER"
 		   }
             }
 	 }
