@@ -2,6 +2,7 @@ pipeline {
     environment {
        registry = "shivakarthik/microservice"
        registryCredential = 'dockerhub'
+       dockerImage = ''
    }
     agent { label 'docker' }
     options { disableConcurrentBuilds() }
@@ -62,7 +63,7 @@ pipeline {
               steps {
 		      script {
 		   
-                             docker.build registry + "person:$BUILD_NUMBER"
+                             docker.build person + ":$BUILD_NUMBER"
 		   }
             }
 	 }
