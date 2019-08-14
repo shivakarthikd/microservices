@@ -64,6 +64,7 @@ pipeline {
 	            docker rmi person:latest
                 '''
             }
+	 }
 			       
     }
  }
