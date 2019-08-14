@@ -52,6 +52,18 @@ pipeline {
 			
 		 }
             }
+	    
+	 stage('Update Docker UAT image') {
+            when { branch "master" }
+              steps {
+                 sh '''
+		    docker login -u "shivakarthik" -p "Karthik@123"
+                    docker build --no-cache -t person .
+                    docker tag person:latest microservice/person:latest
+                    docker push microservice/person:latest
+	            docker rmi person:latest
+                '''
+            }
 			       
     }
  }
