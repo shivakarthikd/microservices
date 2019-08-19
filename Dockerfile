@@ -15,7 +15,7 @@ RUN mkdir -p $PERSON_BINARIES
 WORKDIR $PERSON_HOME
 
 # Copy notepad jar file
-COPY cdata/**/*.jar $PERSON_HOME/person.jar
+COPY build/libs/*.jar $PERSON_HOME/person.jar
 
 # Add initialization script
 ADD entrypoint.sh $PERSON_BINARIES/entrypoint.sh
