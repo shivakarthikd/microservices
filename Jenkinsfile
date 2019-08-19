@@ -71,7 +71,7 @@ pipeline {
 		agent { label  'master'}
                 steps{
                     script {
-                        docker.withRegistry( 'shivakarthik/microservice', registryCredential ) {
+                        docker.withRegistry( 'shivakarthik/microservice', dockerauth ) {
                         dockerImage.push()
 			}
                     }
