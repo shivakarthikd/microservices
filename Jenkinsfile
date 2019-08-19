@@ -57,15 +57,9 @@ pipeline {
 			
 		 }
             }
-         stage('copy artifacts'){
-		    
-		 steps {
-			 copyArtifacts( filter : '/home/jenkins/workspace/Microservices/build/person.jar' , fingerprintArtifacts: true, projectName: 'Microservices', selector: lastSuccessful(),target: '/jenkins/targets')
-		 }
-	 }
 	    
 	 stage('Update Docker UAT image') {
-              when { branch "master" }
+	      agent { label  'master'}
               steps {
 		      script {
 		   
@@ -74,7 +68,7 @@ pipeline {
             }
 	 }
 	 stage('Deploy Image') {
-		when { branch "master" }
+		agent { label  'master'}
                 steps{
                     script {
                         docker.withRegistry( '', registryCredential ) {
