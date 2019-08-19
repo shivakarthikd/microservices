@@ -59,7 +59,7 @@ pipeline {
             }
 	    
 	 stage('Update Docker UAT image') {
-	      
+	      agent { label 'docker' }
               steps {
 		      script {
 		   
@@ -68,7 +68,7 @@ pipeline {
             }
 	 }
 	 stage('Deploy Image') {
-		
+		agent { label 'docker' }
                 steps{
                     script {
                          docker.withRegistry( '', registryCredential ) {
