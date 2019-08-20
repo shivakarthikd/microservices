@@ -66,7 +66,7 @@ pipeline {
 		    steps {
 			    script {
 				        def path=pwd()
-			                sh 'sudo cp path1/*.jar path'
+			                sh 'cp path1/*.jar path'
 			    }
 		    }
 	    }
