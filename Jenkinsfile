@@ -3,6 +3,7 @@ pipeline {
        registry = "shivakarthik/microservice"
        registryCredential = 'fad64690-71a5-4d8a-975b-c92d1c3e74af'
        dockerImage = ''
+ 
    }
     agent { label 'docker' }
     options { disableConcurrentBuilds() }
@@ -54,12 +55,19 @@ pipeline {
         stage('Build') {
 		steps {
 	             sh './gradlew --no-daemon build'
+		     path1=pwd()
 			
 		 }
             }
+	    stage ('copy articrafts') {
+		    agent {label 'master'}
+		    steps {
+			    script {
+				        def path=pwd()
+			                sh 'sudo cp path1/*.jar path'
 	    
 	 stage('Update Docker UAT image') {
-	      
+	      agent { label 'master'}
               steps {
 		      script {
 		   
