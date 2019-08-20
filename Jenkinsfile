@@ -55,7 +55,7 @@ pipeline {
         stage('Build') {
 		steps {
 		  script {
-	             path1=pwd()
+	             def  path1=pwd()
 	             sh './gradlew --no-daemon build'
 		  }
 			
