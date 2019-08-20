@@ -54,8 +54,10 @@ pipeline {
         }
         stage('Build') {
 		steps {
+		  script {
+	             path1=pwd()
 	             sh './gradlew --no-daemon build'
-		     path1=pwd()
+		  }
 			
 		 }
             }
@@ -65,6 +67,9 @@ pipeline {
 			    script {
 				        def path=pwd()
 			                sh 'sudo cp path1/*.jar path'
+			    }
+		    }
+	    }
 	    
 	 stage('Update Docker UAT image') {
 	      agent { label 'master'}
