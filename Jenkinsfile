@@ -64,7 +64,7 @@ pipeline {
 		    steps {
 			    script {
 				        def path=pwd()
-			                sh 'cp /var/lib/docker/volumes/cdata/_data/workspace/**/*.jar path'
+			                sh 'cp -r /var/lib/docker/volumes/cdata/_data/workspace/* path'
 			    }
 		    }
 	    }
