@@ -54,10 +54,8 @@ pipeline {
         }
         stage('Build') {
 		steps {
-		  script {
-	             def  path1=pwd()
+		
 	             sh './gradlew --no-daemon build'
-		  }
 			
 		 }
             }
@@ -66,7 +64,7 @@ pipeline {
 		    steps {
 			    script {
 				        def path=pwd()
-			                sh 'cp path1/*.jar path'
+			                sh 'cp /var/lib/docker/volumes/cdata/_data/workspace/**/*.jar path'
 			    }
 		    }
 	    }
