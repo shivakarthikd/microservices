@@ -92,18 +92,18 @@ pipeline {
                             //version: pom.version,
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
-                            //artifacts: [
+                            artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
-                                //[artifactId: pom.artifactId,
-                                //classifier: '',
-                                //file: artifactPath,
-                                //type: pom.packaging],
+				    [artifactId: ${BUILD_NUMBER},
+                                classifier: '',
+                                file: artifactPath,
+                                type: pom.packaging],
                                 // Lets upload the pom.xml file for additional information for Transitive dependencies
                                // [artifactId: pom.artifactId,
                                 //classifier: '',
                                 //file: "pom.xml",
                                 //type: "pom"]
-                            //]
+                            ]
                         );
                     } else {
                         error "*** File: ${artifactPath}, could not be found";
