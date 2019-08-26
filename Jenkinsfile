@@ -98,7 +98,7 @@ pipeline {
 				    [
                                 classifier: '',
                                 file: artifactPath,
-                                type: 'war'],
+                                type: 'jar'],
                                 // Lets upload the pom.xml file for additional information for Transitive dependencies
                                // [artifactId: pom.artifactId,
                                 //classifier: '',
