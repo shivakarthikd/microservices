@@ -95,10 +95,10 @@ pipeline {
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
-				    [artifactId: artifacttID,
+				    [
                                 classifier: '',
                                 file: artifactPath,
-                                type: pom.packaging],
+                                type: 'war'],
                                 // Lets upload the pom.xml file for additional information for Transitive dependencies
                                // [artifactId: pom.artifactId,
                                 //classifier: '',
