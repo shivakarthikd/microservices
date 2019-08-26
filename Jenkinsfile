@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker' }
+    agent { label 'master' }
     tools{
 	      gradle "G4"
     }
