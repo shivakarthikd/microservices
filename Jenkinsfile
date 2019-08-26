@@ -79,6 +79,7 @@ pipeline {
                     // Print some info from the artifact found
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     // Extract the path from the File found
+		    artifactID=${BUILD_NUMBER}
                     artifactPath = filesByGlob[0].path;
                     // Assign to a boolean response verifying If the artifact name exists
                     artifactExists = fileExists artifactPath;
@@ -94,7 +95,7 @@ pipeline {
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
-				    [artifactId: ${BUILD_NUMBER},
+				    [artifactId: artifacttID,
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
